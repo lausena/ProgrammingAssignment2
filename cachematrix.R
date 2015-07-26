@@ -1,15 +1,33 @@
-## Put comments here that give an overall description of what your
-## functions do
+# EXAMPLE OF INVERTIBLE MATRIX:  matrix(rnorm(16), 4) This is an invertible matrix, use solve(......) to invert.
 
-## Write a short comment describing this function
+# theMatrix <- matrix(rnorm(16), 4)
+# solve(theMatrix) Returns the inverse
+# Use makeCacheMatrix to store and get the matrix inverse.
 
+# makeCacheMatrix will cache the inverse of a matrix
+# and store it for later use.
 makeCacheMatrix <- function(x = matrix()) {
-
+  b <- NULL
+  get <- function() x
+  setMatrixInverse <- function(inverse) b <<- inverse
+  getMatrixInverse <- function() b
+  list(setMatrixInverse = setMatrixInverse, 
+       getMatrixInverse = getMatrixInverse)
 }
 
 
-## Write a short comment describing this function
+# cacheSolve computes the inverse of the special matrix if it
+# is not already cached. If it's cached it will retrieve
+# the inverse from getMatrixInverse()
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  b <- x$getMatrixInverse()
+  if (!is.null(b)) {
+    message("Cached data.")
+    return(b)
+  }
+  data <- x$get()
+  b <- solve(data)
+  x$setMatrixInverse(b)
+  b
 }

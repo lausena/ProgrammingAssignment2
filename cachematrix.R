@@ -14,7 +14,7 @@ makeCacheMatrix <- function(x = matrix()) {
   list(setMatrixInverse = setMatrixInverse, 
        getMatrixInverse = getMatrixInverse)
 }
-
+ 
 
 # cacheSolve computes the inverse of the special matrix if it
 # is not already cached. If it's cached it will retrieve
